@@ -28,10 +28,7 @@ protected:
 	char gender;// patient gender type [m or f]
 	int heartrate;
 public:
-	PhysicalTests (){
-		 gender= NULL;
-		  heartrate=0;
-	};// constructor to initialize the variable to 0 for integers and null for chars
+	PhysicalTests (const char gender, const int heartrate);// constructor to initialize the variable to 0 for integers and null for chars
 		/*void timerfun(){/////NEED TO FIX THIS
 
 			 year = 2013;
@@ -48,16 +45,53 @@ public:
 class urine: public PhysicalTests  {// 1st derived class
 
 	double ph;  //acidity of the urine
- string 	Ketone; //metabolic product (negative)
- string 	Bilirubin;  //breakdown product of hemoglobin (negative)
- string 	Sugar; //glucose (negative)
+	int protein;
+ int	Ketone; //metabolic product (negative)
+ int 	Bilirubin;  //breakdown product of hemoglobin (negative)
+ int 	Sugar; //glucose (negative)
+ int Crystals; //are found if there are high concentrations of certain substances in the urineI(negtive)
 
 public:
  urine( double ph, string 	Ketone,  string Bilirubin, string Sugar);
- void getinfo(); // a function that gets information from users and intializes the values of the variables
- void check_urine(){ // check the values and decide if they are normal or abnormal contidions
+
+ void getinfo(){// a function that gets information from users and intializes the values of the variables
+	 cout<<"ph value:"<<endl;
+	 cin>>ph;
+	 cout<<"protein value"<<endl;
+	 	 cin>>protein;
+	 cout<<"Bilirubin value"<<endl;
+	 cin>>Bilirubin;
+	 cout<<"Sugar value"<<endl;
+	 cin>>Sugar;
+	 cout<<" Crystals value"<<endl;
+	 cin>> Crystals;
 
  };
+ void check_urine(){ // check the values and decide if they are normal or abnormal contidions
+if ((ph> 7)| (ph<5)){
+	cout<< "Abnormal acidity of the urine "<<endl;}
+ else if ((ph<= 7)|(ph>=5)){
+	cout<< "Normal acidity of the urine "<<endl;
+}
+	if (protein > 100){
+		cout<<"(protein is Negative) : Abnormal protien content !"<<endl;}
+	else if(protein >= 100 ) {
+			cout<<"(protein is Positive) : Normal protien content !"<<endl;}
+	if (Bilirubin> 150){
+			cout<<"(Bilirubin is Negative) : Abnormal Bilirubin content !"<<endl;}
+		else if(Bilirubin >= 150 ) {
+				cout<<"(Bilirubin is Positive) : Normal Bilirubin content !"<<endl;}
+	if (Sugar> 300){
+				cout<<"(Sugar is Negative) : Abnormal Sugar content !"<<endl;}
+			else if(Sugar >= 300 ) {
+					cout<<"(Sugar is Positive) : Normal Sugar incontent !"<<endl;}
+	if (Crystals> 50){
+					cout<<"(Crystals is Negative) : Abnormal Crystals content !"<<endl;}
+				else if(Crystals >= 50 ) {
+						cout<<"(Crystals is Positive) : Normal Crystals incontent !"<<endl;}
+	};
+
+
  void annotation();//adding the doctor, nurse or the radiologist comments
  void printinfo_urine(); //print the patient info
 
