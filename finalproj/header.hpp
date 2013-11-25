@@ -19,37 +19,50 @@ class PhysicalTests {//base class
 protected:
 	//time_t timer;
 	//struct tm current; // a structure for the time function
-		//int currday;
-		//double sec;
-		//int year;
-	//double sec;
+		int currday;
+		int month;
+		int year;
+        int hour;
+        int min;
 
 
 	char gender;// patient gender type [m or f]
-	int heartrate;
+	string name;
+	int id;
 public:
-	PhysicalTests (const char gender, const int heartrate);// constructor to initialize the variable to 0 for integers and null for chars
-		/*void timerfun(){/////NEED TO FIX THIS
+	PhysicalTests (const char gender, string name);// constructor to initialize the variable to 0 for integers and null for chars
+		void timerfun(){/////NEED TO FIX THIS
 
 			 year = 2013;
-			cout<<" enter the time in day"<<endl;
+			cout<<" enter the  day"<<endl;
 			cin>> currday;
+			cout<<" enter the month"<<endl;
+				cin>> month;
+cout <<" Enter the hour"<<endl;
+cin >>hour;
+cout <<" Enter the minutes"<<endl;
+cin >>min;
+		}
 
-			time (&timer);
-			sec = difftime (timer, mktime (&current));
-			cout <<"Today is"<< current<<" th of November,"<<year<<"-"<<sec<<endl;
+		void GETINFO(){
 
-		}*/
+			cout<<"Name of Doctor/ Nurse :"<<endl;
+			cin>>name;
+			cout <<"ID number:"<<endl;
+			cin>> id;
+			cout<<" Patient Gender (F/M):"<<endl;
+						cin >>gender;
+		}
 
 };
 class urine: public PhysicalTests  {// 1st derived class
 
 	double ph;  //acidity of the urine
-	int protein;
- int	Ketone; //metabolic product (negative)
- int 	Bilirubin;  //breakdown product of hemoglobin (negative)
- int 	Sugar; //glucose (negative)
- int Crystals; //are found if there are high concentrations of certain substances in the urineI(negtive)
+	double protein;
+ double	Ketone; //metabolic product (negative)
+ double 	Bilirubin;  //breakdown product of hemoglobin (negative)
+ double	Sugar; //glucose (negative)
+ double Crystals; //are found if there are high concentrations of certain substances in the urineI(negtive)
 
 public:
  urine( double ph, string 	Ketone,  string Bilirubin, string Sugar);
@@ -98,23 +111,96 @@ if ((ph> 7)| (ph<5)){
 };
 
 class bloodpressure: public PhysicalTests  {
-	int systolic ,diastolic;
+double systolic ,diastolic;
 
 public:
-	void getinfo_press (); // gets info from user
-	void check_press(); // check the condition
+bloodpressure(double systolic , double diastolic );
+	void getinfo_press ()// gets info from user
+	{
+		cout<<"Systolic pressure:"<<endl;
+		cin>>systolic;
+		cout<<"Diastolic pressure:"<<endl;
+				cin>>diastolic;
+	};
+
+	void check_press()// check the condition
+	{
+
+		if ( (systolic >= 140)| (diastolic >= 90 )){
+			cout <<"High Blood Pressure"<<endl;
+		}
+
+		else if (((systolic <=139)& (systolic >=120)) | ((diastolic <=89)& (diastolic >=80)) )
+		{
+			cout<<"prehypertension"<<endl;
+		}
+
+		else if ( (systolic <= 120)| (diastolic <= 80 )){
+					cout <<"Normal blood pressure "<<endl;
+				};
+	}
+
+
+
 	void annotation_press (); //adding the doctor or nurse  comments
 	 void printinfo_press(); //print the patient info
 
 };
 
 class temprature: public PhysicalTests  {
-	int oraly;// from mouth
-	int axillary; // emperatures taken by this route tend to be 0.3 to 0.4 degrees F lower than those temperatures taken by mouth
-	int rectally; //Temperatures taken rectally (using a glass or digital thermometer) tend to be 0.5 to 0.7 degrees F higher than when taken by mouth
+	double c_oraly, f_oraly;// from mouth
+	double c_axillary,f_axillary; // temperatures taken by this route tend to be 0.3 to 0.4 degrees F lower than those temperatures taken by mouth
+	int choice;
+	int type;
+
 public:
-	void getinfo_temp (); // gets info from user
-	void check_temp(); // check the condition
+
+	temprature( double c_oraly,  double f_oraly, double c_axillary, double f_axillary, int choice, int type );
+	void getinfo_temp (){ // gets info from user
+
+
+
+		cout <<"1-Celsius \n 2-Fahrenheit"<<endl;
+			cin >> choice;
+			if (choice==1){
+
+				cout<<"1- Oraly \n 2- Axillary"<<endl;
+				cin>>type;
+			if (type ==1){
+				cout<<"Temprature :"<<endl;
+								cin>>c_oraly;}
+
+			else { cout<<"Temprature :"<<endl;
+			cin>>c_axillary; }
+			}
+
+
+			else if (choice==2){
+				cout<<"1- Oraly \n 2- Axillary"<<endl;
+								cin>>type;
+							if (type ==1){
+								cout<<"Temprature :"<<endl;
+												cin>>f_oraly;
+							}
+							else { cout<<"Temprature :"<<endl;
+							cin>>f_axillary; }
+			}
+
+	};
+
+	void check_temp(){ // check the condition
+
+if ((c_oraly >= 37.5 )| (f_oraly >= 99) | (c_axillary >= 37.5-0.4 )|(f_axillary>= 99-0.4)){
+	cout<<"High Temprature !"<<endl;
+}
+else
+{
+	cout <<"Low Temptaure !"<<endl;}
+
+	};
+
+
+
 	void annotation_temp (); //adding the doctor or nurse comments
 	 void printinfo_temp(); //print the patient info
 };
